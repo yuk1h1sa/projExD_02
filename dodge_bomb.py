@@ -3,6 +3,13 @@ import sys
 
 import pygame as pg
 
+
+delt = {pg.K_UP: (0,-1),
+        pg.K_DOWN: (0,+1),
+        pg.K_LEFT: (-1,0),
+        pg.K_RIGHT: (+1,0)
+        }
+
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((1600, 900))
@@ -19,6 +26,8 @@ def main():
     vx,vy = +1,+1
     bb_rct = bb_img.get_rect()
     bb_rct.center = bb_y,bb_x
+    kk_rct = kk_img.get_rect()
+    kk_rct.center = 400,900
 
     while True:
         for event in pg.event.get():
@@ -26,8 +35,14 @@ def main():
                 return 0
 
         tmr += 1
+
+        key_lst = pg.key.get_pressed()
+        for k,mv in delt.items():
+            if key_lst[k]:
+                kk_rct.move_ip(mv)
+
         screen.blit(bg_img, [0, 0])
-        screen.blit(kk_img, [900, 400])
+        screen.blit(kk_img, kk_rct)
         bb_rct.move_ip(vx,vy)
         screen.blit(bb_img,bb_rct)
 
