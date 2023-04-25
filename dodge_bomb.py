@@ -10,6 +10,17 @@ delt = {pg.K_UP: (0,-1),
         pg.K_RIGHT: (+1,0)
         }
 
+kk_img = pg.image.load("ex02/fig/3.png")
+
+kk_img_a = {(+1,0):pg.transform.rotozoom(kk_img, 0, 2.0),
+            (+1,-1):pg.transform.rotozoom(kk_img, 45, 2.0),
+            (0,-1):pg.transform.rotozoom(kk_img, 90, 2.0),
+            (-1,-1):pg.transform.rotozoom(kk_img, 135, 2.0),
+            (-1,0):pg.transform.rotozoom(kk_img, 180, 2.0),
+            (-1,+1):pg.transform.rotozoom(kk_img, 225, 2.0),
+            (0,+1):pg.transform.rotozoom(kk_img, 270, 2.0),
+            (+1,+1):pg.transform.rotozoom(kk_img, 315, 2.0)
+            }
 
 def check_bound(scr_rct: pg.Rect,obj_rct:pg.Rect):
     """
@@ -33,6 +44,8 @@ def main():
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+
+
 
     tmr = 0
 
@@ -77,7 +90,10 @@ def main():
             vx *= -1
         if not tate:
             vy *= -1
+        
         screen.blit(bb_img,bb_rct)
+        if kk_rct.colliderect(bb_rct):
+            return
 
         pg.display.update()
         clock.tick(1000)
