@@ -12,7 +12,7 @@ delt = {pg.K_UP: (0,-1),
 
 kk_img = pg.image.load("ex02/fig/3.png")
 
-kk_img_a = {(+1,0):pg.transform.rotozoom(kk_img, 0, 2.0),
+kk_img_a = {(+1,0):pg.transform.rotozoom(kk_img, 0, 2.0),        #こうかとんの向きとそれに対応する画像のリスト
             (+1,-1):pg.transform.rotozoom(kk_img, 45, 2.0),
             (0,-1):pg.transform.rotozoom(kk_img, 90, 2.0),
             (-1,-1):pg.transform.rotozoom(kk_img, 135, 2.0),
@@ -40,21 +40,29 @@ def check_bound(scr_rct: pg.Rect,obj_rct:pg.Rect):
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
     screen = pg.display.set_mode((1600, 900))
+
     clock = pg.time.Clock()
+    
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
+
     kk_img = pg.image.load("ex02/fig/3.png")
+
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
+
     kk_img_1 =pg.image.load("ex02/fig/6.png")
-    kk_img_2 = pg.transform.rotozoom(kk_img_1,0,5.0)
+
+    kk_img_2 = pg.transform.rotozoom(kk_img_1,0,2.0)
 
     tmr = 0
 
     bb_img = pg.Surface((20,20))
+
     pg.draw.circle(bb_img,(255,0,0),(10,10),10)
+
     bb_img.set_colorkey((0,0,0))
 
-    bb_x = random.randint(0,1600)
-    bb_y = random.randint(0,900)
+    bb_x = random.randint(0,1600)  #爆弾のx座標
+    bb_y = random.randint(0,900)  #爆弾のy座標
 
     vx,vy = +1,+1
 
@@ -72,18 +80,25 @@ def main():
         tmr += 1
 
         key_lst = pg.key.get_pressed()
+
         for k,mv in delt.items():
+
             if key_lst[k]:
+
                 kk_rct.move_ip(mv)
 
         if check_bound(screen.get_rect(), kk_rct) != (True, True):
+
             for k, mv in delt.items():
+
                 if key_lst[k]:
+
                     kk_rct.move_ip(-mv[0], -mv[1]) 
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)
         bb_rct.move_ip(vx,vy)
+
         yoko, tate = check_bound(screen.get_rect(), bb_rct)
         if not yoko:
             vx *= -1
