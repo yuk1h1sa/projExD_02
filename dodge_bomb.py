@@ -81,7 +81,6 @@ def main():
                 if key_lst[k]:
                     kk_rct.move_ip(-mv[0], -mv[1]) 
 
-
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)
         bb_rct.move_ip(vx,vy)
@@ -92,6 +91,7 @@ def main():
             vy *= -1
         
         screen.blit(bb_img,bb_rct)
+        
         if kk_rct.colliderect(bb_rct):
             clock.tick(0.1)
             screen.blit(kk_img_2,[800,450])
