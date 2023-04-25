@@ -16,6 +16,9 @@ def main():
     bb_img.set_colorkey((0,0,0))
     bb_x = random.randint(0,1600)
     bb_y = random.randint(0,900)
+    vx,vy = +1,+1
+    bb_rct = bb_img.get_rect()
+    bb_rct.center = bb_y,bb_x
 
     while True:
         for event in pg.event.get():
@@ -25,7 +28,8 @@ def main():
         tmr += 1
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
-        screen.blit(bb_img,[bb_x,bb_y])
+        bb_rct.move_ip(vx,vy)
+        screen.blit(bb_img,bb_rct)
 
         pg.display.update()
         clock.tick(1000)
