@@ -44,8 +44,8 @@ def main():
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
-
-
+    kk_img_1 =pg.image.load("ex02/fig/6.png")
+    kk_img_2 = pg.transform.rotozoom(kk_img_1,0,5.0)
 
     tmr = 0
 
@@ -93,6 +93,8 @@ def main():
         
         screen.blit(bb_img,bb_rct)
         if kk_rct.colliderect(bb_rct):
+            clock.tick(0.1)
+            screen.blit(kk_img_2,[800,450])
             return
 
         pg.display.update()
